@@ -3,6 +3,8 @@
 
 ![npm](https://img.shields.io/npm/v/react-native-user-identity.svg) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-native-user-identity.svg) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![GitHub](https://img.shields.io/github/license/juliandramirez/react-native-user-identity.svg)
 
+Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)
+
 ## Why should you use this?
 
 When implementing a mobile application you want to provide the users all of the functionality you can without them needing to sign up. After all, [Every Step Costs You 20% of Users](https://medium.com/gabor/every-step-costs-you-20-of-users-b613a804c329). <br>
