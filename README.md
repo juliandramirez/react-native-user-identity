@@ -96,7 +96,11 @@ You should be able to build the project now. If there were errors in the linking
 ## Configuration
 
 ### iOS
-Enable the CloudKit capability in the XCode project:
+1. Make sure your app has a unique bundle identifier and does not show any errors in the Signing section (requires an apple development account):
+
+![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-signing.png)
+
+2. Enable the CloudKit capability in the XCode project:
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-cloudkit.png)
 
