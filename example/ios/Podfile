@@ -1,0 +1,33 @@
+source 'https://github.com/CocoaPods/Specs.git'
+install! 'cocoapods', :deterministic_uuids => false
+
+platform :ios, '9.0'
+
+target 'example' do
+  pod 'React', :path => '../node_modules/react-native', :modular_headers => true, :subspecs => [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket',
+    'RCTAnimation',
+    # Add any other subspecs you want to use in your project
+    # Remove any subspecs you don't want to use in your project
+  ]
+
+  pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'react-native-user-identity', :modular_headers => true, :path => '../node_modules/react-native-user-identity'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end

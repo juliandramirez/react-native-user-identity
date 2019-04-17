@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-user-identity/ios/RNUserIdentity-Bridging-Header.h

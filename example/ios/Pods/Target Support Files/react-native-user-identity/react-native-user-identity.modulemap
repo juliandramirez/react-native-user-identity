@@ -1,0 +1,6 @@
+module react_native_user_identity {
+  umbrella header "react-native-user-identity-umbrella.h"
+
+  export *
+  module * { export * }
+}
