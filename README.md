@@ -1,7 +1,7 @@
 
 # react-native-user-identity
 
-![npm](https://img.shields.io/npm/v/react-native-user-identity.svg) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-native-user-identity.svg) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![GitHub](https://img.shields.io/github/license/juliandramirez/react-native-user-identity.svg)
+![npm](https://img.shields.io/npm/v/react-native-user-identity.svg) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-native-user-identity.svg) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![GitHub](https://img.shields.io/github/license/juliandramirez/react-native-user-identity.svg) ![Codecov](https://img.shields.io/codecov/c/github/juliandramirez/react-native-user-identity.svg)
 
 Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)
 
