@@ -146,7 +146,7 @@ If you have other UI fragments that you want to trigger the account selection di
 * There is only one public function available called ***getUserId***
 * The function is marked as ***async***
 * On **ios** the resolved value is ***null*** when there is no icloud account configured 
-* On **android** the resolved value is ***null*** when the user dismisses the account selection dialog
+* On **android** the resolved value is ***null*** when the user dismisses the account selection dialog or when there is not an account configured in the device
 
 ```javascript
 import RNUserIdentity from 'react-native-user-identity'
