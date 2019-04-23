@@ -10,7 +10,7 @@ Get the user id configured for the device (iCloud recordID for iOS, email of a d
 When implementing a mobile application you want to provide the users all of the functionality you can without them needing to sign up. After all, [Every Step Costs You 20% of Users](https://medium.com/gabor/every-step-costs-you-20-of-users-b613a804c329). <br>
 Sign up may very well be the step where most of your potential users are lost.
 
-Now imagine you could get a unique identifier that worked accross all of the devices of the user.
+Now imagine you could get a unique identifier that worked across all of the devices of the user.
 You could even have in app purchases that are shared across devices **without asking your users to sign-up**.
 
 This library aims to provide all of this in the simplest way possible:
