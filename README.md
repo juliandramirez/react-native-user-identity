@@ -1,19 +1,19 @@
 
 # react-native-user-identity
 
-![npm](https://img.shields.io/npm/v/react-native-user-identity.svg) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-native-user-identity.svg) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![GitHub](https://img.shields.io/github/license/juliandramirez/react-native-user-identity.svg) ![Codecov](https://img.shields.io/codecov/c/github/juliandramirez/react-native-user-identity.svg)
+![npm](https://img.shields.io/npm/v/react-native-user-identity.svg) ![npm](https://img.shields.io/npm/dt/react-native-user-identity) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-native-user-identity.svg) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![GitHub](https://img.shields.io/github/license/juliandramirez/react-native-user-identity.svg) ![Codecov](https://img.shields.io/codecov/c/github/juliandramirez/react-native-user-identity.svg)
 
 Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)
 
 ## Why should you use this?
 
-When implementing a mobile application you want to provide the users all of the functionality you can without them needing to sign up. After all, [Every Step Costs You 20% of Users](https://medium.com/gabor/every-step-costs-you-20-of-users-b613a804c329). <br>
+When implementing a mobile application you want to provide your users as much functionality as you can without having them sign up. After all, [Every Step Costs You 20% of Users](https://medium.com/gabor/every-step-costs-you-20-of-users-b613a804c329). <br>
 Sign up may very well be the step where most of your potential users are lost.
 
 Now imagine you could get a unique identifier that worked across all of the devices of the user.
-You could even have in app purchases that are shared across devices **without asking your users to sign-up**.
+You could even have in-app purchases that are shared across devices **without having to sign-up**.
 
-This library aims to provide all of this in the simplest way possible:
+This library aims to provide all of the above in the simplest way possible:
 * For ios it uses the record name of CloudKit so it uniquely identifies an ios user. It's difficult to imagine an apple user that does not have an iCloud account configured in each of their devices.
 * For android it presents to the user a list of all the accounts configured in the device to choose from.<br>The most common use case is to present the list of google accounts configured since it's one of the first steps of configuring an android device nowadays.
 
@@ -197,5 +197,5 @@ Use yarn to install the dependencies. Npm installs local dependencies using symb
 ### Why can't we get the iCloud email and instead we get this long obfuscated string?
 The CloudKit framework prevents applications from accesing the user email for privacy purposes.
 
-### Is there another option for having an user id without asking users to sign up?
+### Is there another option for having a user id without asking users to sign up?
 You could use the same principle behind [Firebase anonymous authentication](https://firebase.google.com/docs/auth/web/anonymous-auth) but most likely you will run into the same limitations: Identities are associated to app installations (or devices in the best case scenario).
