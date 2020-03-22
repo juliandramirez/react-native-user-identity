@@ -1,8 +1,8 @@
 {
   "name": "react-native-user-identity",
-  "version": "1.0.0",
-  "summary": "Get the user identity configured for the device (iCloud recordID for iOS, email of a device account for android)",
-  "license": "MIT",
+  "version": "1.1.7",
+  "summary": "Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)",
+  "license": "Apache-2.0",
   "authors": "Julian Ramírez <julianramirez@gmail.com>",
   "homepage": "https://github.com/juliandramirez/react-native-user-identity",
   "platforms": {
@@ -13,7 +13,7 @@
     "tag": "master"
   },
   "source_files": "ios/**/*.{h,m,swift}",
-  "swift_version": "4.2",
+  "swift_versions": "4.2",
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES"
   },
@@ -21,5 +21,6 @@
     "React": [
 
     ]
-  }
+  },
+  "swift_version": "4.2"
 }
