@@ -20,6 +20,10 @@ This library aims to provide all of the above in the simplest way possible:
 ## Why just not use firebase anonymous authentication?
 See FAQ section at the bottom.
 
+## Why shouldn't you use this?
+This package requires you to activate the iCloud entitlement on iOS. <br>
+As of today apple does not permit transfering ownership of an application that has this entitlement active for **ANY** of it's versions. Read more [here](https://help.apple.com/app-store-connect/#/devaf27784ff)
+
 ## Installation
 **1. Install the library**
 ```
@@ -36,7 +40,7 @@ This configures your iOS project to use the module correctly since the library c
 
 **Note:** If your iOS project is alredy using swift files and you have a bridging header you may skip this step.
 
-a. Create a swift file in the root of your project:
+a. Create a swift file qith any name in the root of your project:
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/create-swift.png)
 
@@ -48,6 +52,8 @@ b. Select "Create Bridging Header" when Xcode asks for it:
 
 You should be able to build the project now. <br>
 **Note:** The package functionality will not work until you follow the steps of the next section
+
+**Note 2:** If you are having trouble building your project after executing the example try opening XCode preferences, select the "Locations" tab and set DerivedData to be a relative folder.
 
 ## Configuration
 
@@ -105,7 +111,7 @@ If you have other UI fragments that you want to trigger the account selection di
 
 **Verify all of the following:**
 * The format of the container name is iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)
-* Press the "Cloudkit Dashboard" button, sign in with your developer account. You should see your newly created container in the list of containers. Verify that there is no error when selecting it. If there is an error just keep trying until it becomes available.
+* Press the "Cloudkit Dashboard" button, sign in with your developer account. You should see your newly created container in the list of containers (If you don't see it go to XCode and press the refresh button until it does). Verify that there is no error when selecting your container in the web dashboard. <br> If there is an error just wait and keep trying until the container is created succesfully (web dashboard/Xcode 11 seems to be buggy here since creating an iCloud container actually takes a couple of minutes).
 * Go back to XCode and verify that the container name is not highlighted in red after you press the refresh option
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-icloudverified.png)
@@ -170,4 +176,4 @@ You could use the same principle behind [Firebase anonymous authentication](http
 The CloudKit framework prevents applications from accesing the user email for privacy purposes.
 
 ### I can not make this work on iOS...
-iOS configuration is a hassle 😔. Make sure you followed all of the steps in the configuration section and pay attention to the important note at the end it.
+Make sure you followed all of the steps in the installation and configuration section and pay attention to the verification note at the end of the configuration section
