@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.github.juliandramirez.rn.useridentity.example">
+  package="com.useridentityexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
