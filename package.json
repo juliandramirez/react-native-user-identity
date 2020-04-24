@@ -1,6 +1,6 @@
 {
   "name": "react-native-user-identity",
-  "version": "1.2.1",
+  "version": "1.3.1",
   "description": "Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)",
   "main": "index.js",
   "author": "Julian Ramírez <julianramirez@gmail.com>",
@@ -17,6 +17,7 @@
     "fetchUserRecordID",
     "CloudKit",
     "iCloud",
+    "firebase",
     "recordID",
     "CKContainer",
     "recordName",
@@ -39,7 +40,7 @@
     "account",
     "intent",
     "newChooseAccountIntent",
-    "KEY_ACCOUNT_NAME"
+    "KEY_ACCOUNT_NAME"    
   ],
   "peerDependencies": {
     "react-native": ">=0.60.0",

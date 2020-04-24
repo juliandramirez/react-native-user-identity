@@ -14,8 +14,7 @@ export default class App extends Component {
   buttonPress = async () => {
 
     const result = await RNUserIdentity.getUserId({
-            androidAccountSelectionMessage: 'Choose an account for testing:',
-            androidAccountType: 'com.google'
+            androidAccountSelectionMessage: 'Choose an account for testing:'
     })
 
     if (result === null) {

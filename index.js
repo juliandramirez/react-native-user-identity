@@ -4,9 +4,8 @@ import { Platform, NativeModules } from 'react-native'
 const { RNUserIdentity } = NativeModules
 
 export default {
-    getUserId: async (data = {
-        androidAccountSelectionMessage: null,
-        androidAccountType: null
+    getUserId: async ({ androidAccountSelectionMessage } = {
+        androidAccountSelectionMessage: null
     }) => {
         if (Platform.OS === 'ios') {
             try {
@@ -20,10 +19,8 @@ export default {
                 }
             }
         } else if (Platform.OS === 'android') {
-            let {androidAccountSelectionMessage, androidAccountType} = data;
-    
             try {
-                return await RNUserIdentity.triggerAccountSelection(androidAccountSelectionMessage, androidAccountType);
+                return await RNUserIdentity.triggerAccountSelection(androidAccountSelectionMessage, 'com.google');
             } catch (error) {           
                 if (error && error.code == 'USER_CANCELED_ACCOUNT_SELECTION') {
                     // user cancelled the account selection process...
