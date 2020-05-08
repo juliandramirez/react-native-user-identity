@@ -145,9 +145,9 @@ fetchUserIdentity = async () => {
 }
 ```
 
-### IOS user confirmation
+### IOS user confirmation (only if you want user intervention)
 
-On iOS fetching the id <u>**does not require user intervention**</u>. However, it might be useful in some instances to have the user confirm the action.<br>
+On iOS fetching the id **does not require user intervention**. However, it might be useful in some instances to have the user confirm the action.<br>
 You may send a *truthy* value for the **iosUserConfirmation** parameter for this to happen.
 
 The following code:
