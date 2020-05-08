@@ -19,7 +19,7 @@ This library aims to provide all of the above in the simplest way possible:
 
 <br>
 Note: If you are already using firebase authentication see the FAQ for instructions on how to upgrade its anonymous authentication
-<br>
+<br><br>
 Note: If you are considering using Sign In with Apple see the FAQ section first
 
 ## Why shouldn't you use this?
@@ -45,7 +45,7 @@ This configures your iOS project to use the module correctly since the library c
 
 **Note:** If your iOS project is alredy using swift files and you have a bridging header you may skip this step.
 
-a. Create a swift file qith any name in the root of your project:
+a. Create a swift file with any name in the root of your project:
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/create-swift.png)
 
@@ -135,19 +135,19 @@ fetchUserIdentity = async () => {
 	try {
 		const result = await RNUserIdentity.getUserId()
 		if (result === null) {
-        	alert('User canceled UI flow')
-    	} 
+			alert('User canceled UI flow')
+		} 
 	} catch(error) {
 		if (error === ICLOUD_ACCESS_ERROR) {
-        	alert('Please set up an iCloud account in settings')
-      	}
+			alert('Please set up an iCloud account in settings')
+		}
 	}
 }
 ```
 
 ### IOS user confirmation
 
-On iOS fetching the user id does not require user intervention. However, it might be useful in some instances to have the user confirm the action.<br>
+On iOS fetching the id <u>**does not require user intervention**</u>. However, it might be useful in some instances to have the user confirm the action.<br>
 You may send a *truthy* value for the **iosUserConfirmation** parameter for this to happen.
 
 The following code:
@@ -169,11 +169,11 @@ You can also configure the text shown to the user:
 ```javascript
 RNUserIdentity.getUserId({
 		iosUserConfirmation: {
-            title: 'Confirm sign in',
-            message: 'Sign in requires user confirmation',
-            signInButtonText: 'Confirm',
-            cancelButtonText: 'Back'
-        }
+			title: 'Confirm sign in',
+			message: 'Sign in requires user confirmation',
+			signInButtonText: 'Confirm',
+			cancelButtonText: 'Back'
+		}
 })
 ```
 
@@ -232,7 +232,7 @@ exports.tokenFromUID = functions.https.onCall( async (data, context) => {
 
     try {
         return await admin.auth().createCustomToken(uid)
-    }catch(error) {
+    } catch(error) {
         console.log('Error creating custom token: ', error)
         throw new functions.https.HttpsError('internal', error ? error.message : '')
     }

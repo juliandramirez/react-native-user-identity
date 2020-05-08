@@ -1,6 +1,6 @@
 {
   "name": "react-native-user-identity",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)",
   "main": "index.js",
   "author": "Julian Ramírez <julianramirez@gmail.com>",
