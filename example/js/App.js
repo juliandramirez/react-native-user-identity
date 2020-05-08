@@ -1,8 +1,8 @@
 
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View, Button} from 'react-native'
+import {Platform, StyleSheet, Text, View, Button, Alert} from 'react-native'
 
-import RNUserIdentity from 'react-native-user-identity'
+import RNUserIdentity, { ICLOUD_ACCESS_ERROR } from 'react-native-user-identity'
 
 
 export default class App extends Component {
@@ -12,20 +12,26 @@ export default class App extends Component {
   }
 
   buttonPress = async () => {
-
-    const result = await RNUserIdentity.getUserId({
-            androidAccountSelectionMessage: 'Choose an account for testing:'
-    })
-
-    if (result === null) {
-      if (Platform.OS === 'ios') {
-        alert('Please set up an iCloud account in settings')
-      } else if (Platform.OS === 'android') {
-        alert('Please select an existing account or create a new one')
+    try {
+      const result = await RNUserIdentity.getUserId({
+          androidAccountSelectionMessage: 'Choose an account for testing:',
+          iosUserConfirmation: {
+              title: 'Confirm sign in',
+              message: 'Sign in requires user confirmation',
+              signInButtonText: 'Confirm',
+              cancelButtonText: 'Back'
+          }
+      })
+      if (result === null) {
+        this.setState({result: 'User canceled sign in flow'})          
+      } else {
+        this.setState({result: result})          
+      }
+    } catch(error) {
+      if (error == ICLOUD_ACCESS_ERROR) {
+        this.setState({result: 'Please set up an iCloud account in settings'})
       }
     }
-
-    this.setState({result: result})    
   }
 
   render() {

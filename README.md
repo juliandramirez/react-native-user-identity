@@ -19,12 +19,14 @@ This library aims to provide all of the above in the simplest way possible:
 
 <br>
 Note: If you are already using firebase authentication see the FAQ for instructions on how to upgrade its anonymous authentication
+<br>
+Note: If you are considering using Sign In with Apple see the FAQ section first
 
 ## Why shouldn't you use this?
 This package requires you to activate the iCloud entitlement on iOS. <br>
 As of today apple does not permit transfering ownership of an application that has this entitlement active for **ANY** of it's versions. Read more [here](https://help.apple.com/app-store-connect/#/devaf27784ff) <br>
 <br>
-If you want to transfer your app in the future and you still want to use this package, consider using an apple developer account exclusively for the app and when the time comes just give away the account.
+If you want to transfer your app in the future and you still want to use this package consider using an apple developer account exclusively for the app, and when the time comes transfer the account.<br>
 A personal apple developer account can be changed to a corporate account if needed, as is most of its information.
 
 ## Installation
@@ -123,23 +125,56 @@ If you have other UI fragments that you want to trigger the account selection di
 
 * There is only one public function available called ***getUserId***
 * The function is marked as ***async***
-* On **ios** the resolved value is ***null*** when there is no icloud account configured 
-* On **android** the resolved value is ***null*** when the user dismisses the account selection dialog or when there is not an account configured in the device
-
+* The resolved value is ***null*** when the user cancels the UI flow
+* On **ios** the function will throw ICLOUD_ACCESS_ERROR when there is no icloud account configured
+  
 ```javascript
-import RNUserIdentity from 'react-native-user-identity'
+import RNUserIdentity, { ICLOUD_ACCESS_ERROR } from 'react-native-user-identity'
 
 fetchUserIdentity = async () => {
-	const result = await RNUserIdentity.getUserId()
-
-	if (result === null) {
-		if (Platform.OS === 'ios') {
-			alert('Please set up an iCloud account in settings')
-		} else if (Platform.OS === 'android') {
-			alert('Please select an existing account or create a new one')
-		}
+	try {
+		const result = await RNUserIdentity.getUserId()
+		if (result === null) {
+        	alert('User canceled UI flow')
+    	} 
+	} catch(error) {
+		if (error === ICLOUD_ACCESS_ERROR) {
+        	alert('Please set up an iCloud account in settings')
+      	}
 	}
 }
+```
+
+### IOS user confirmation
+
+On iOS fetching the user id does not require user intervention. However, it might be useful in some instances to have the user confirm the action.<br>
+You may send a *truthy* value for the **iosUserConfirmation** parameter for this to happen.
+
+The following code:
+
+```javascript
+RNUserIdentity.getUserId({
+		iosUserConfirmation: true
+})
+```
+
+Presents this dialog:
+
+![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/ios-user-confirmation.png)
+
+The resolved value will be ***null*** if the user dismisses the dialog
+<br><br>
+You can also configure the text shown to the user:
+
+```javascript
+RNUserIdentity.getUserId({
+		iosUserConfirmation: {
+            title: 'Confirm sign in',
+            message: 'Sign in requires user confirmation',
+            signInButtonText: 'Confirm',
+            cancelButtonText: 'Back'
+        }
+})
 ```
 
 ### Android account chooser options
@@ -167,6 +202,11 @@ Use yarn to install the dependencies. Npm installs local dependencies using symb
 
 ### Why can't we get the iCloud email and instead we get this long obfuscated string?
 The CloudKit framework prevents applications from accesing the user email for privacy purposes.
+
+### How is this different from Sign In with apple on iOS?
+Sign in with Apple requires the user to complete a full sign in flow.<br>
+The point of using this package is to skip entirely this flow so your users can directly start using your application<br>
+Furthermore, activating sign in with Apple also prevents your app from being transferable (see the **Why shouldn't you use this?** section above)
 
 ### I can not make this work on iOS...
 Make sure you followed all of the steps in the installation and configuration section and pay attention to the verification note at the end of the configuration section
