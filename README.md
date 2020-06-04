@@ -62,6 +62,10 @@ You should be able to build the project now. <br>
 
 ## Configuration
 
+### Android
+
+Nothing to configure.
+
 ### iOS 
 (Screenshots taken with Xcode 11.x)
 
@@ -85,41 +89,6 @@ You should be able to build the project now. <br>
 * Go back to XCode and verify that the container name is not highlighted in red after you press the refresh option
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-icloudverified.png)
-
-### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-2. Add the following lines to the class:
-
-```diff
-package com.github.juliandramirez.rn.useridentity.example;
-
-import com.facebook.react.ReactActivity;
-+ import android.content.Intent;
-+ import com.github.juliandramirez.rn.useridentity.RNUserIdentityModule;
-
-
-public class MainActivity extends ReactActivity {
-
-    @Override
-    protected String getMainComponentName() {
-        return "UserIdentityExample";
-    }
-
-+    @Override
-+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-+        super.onActivityResult(requestCode, resultCode, data);
-+
-+        if(requestCode == RNUserIdentityModule.INTENT_REQUEST_CODE) {
-+            RNUserIdentityModule module = 
-+                this.getReactInstanceManager().getCurrentReactContext().getNativeModule(RNUserIdentityModule.class);
-+            module.onActivityResult(resultCode, data);
-+        }
-+    }
-}
-```
-**Note:**
-If you have other UI fragments that you want to trigger the account selection dialog from, add the same lines to their activities
 
 ## Usage
 

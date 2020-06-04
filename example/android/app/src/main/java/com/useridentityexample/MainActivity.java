@@ -1,8 +1,6 @@
 package com.useridentityexample;
 
 import com.facebook.react.ReactActivity;
-import android.content.Intent;
-import com.github.juliandramirez.rn.useridentity.RNUserIdentityModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -14,15 +12,5 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "UserIdentityExample";
   }
-
-  @Override
-  public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    if(requestCode == RNUserIdentityModule.INTENT_REQUEST_CODE) {
-      RNUserIdentityModule module = 
-        this.getReactInstanceManager().getCurrentReactContext().getNativeModule(RNUserIdentityModule.class);
-      module.onActivityResult(resultCode, data);
-    }
-  }    
+   
 }

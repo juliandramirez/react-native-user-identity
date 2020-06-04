@@ -16,6 +16,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.module.annotations.ReactModule;
 
 
@@ -33,6 +34,18 @@ public class RNUserIdentityModule extends ReactContextBaseJavaModule {
   public RNUserIdentityModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
+    this.reactContext.addActivityEventListener(new BaseActivityEventListener() {
+      public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {      
+        if(requestCode == INTENT_REQUEST_CODE) {
+          if (resultCode == Activity.RESULT_OK) {
+            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+            promise.resolve(accountName);
+          } else {
+              promise.reject("USER_CANCELED_ACCOUNT_SELECTION", "User cancelled the account selection dialog");
+          }
+        }
+      }
+    });
   }
 
   /* MARK: - Methods */
@@ -70,15 +83,6 @@ public class RNUserIdentityModule extends ReactContextBaseJavaModule {
           activity.startActivityForResult(intent, INTENT_REQUEST_CODE);
       }
   }
-
-  public void onActivityResult(int resultCode, Intent data) {
-      if(resultCode == Activity.RESULT_OK) {
-          String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-          this.promise.resolve(accountName);
-      } else {
-          this.promise.reject("USER_CANCELED_ACCOUNT_SELECTION", "User cancelled the account selection dialog");
-      }
-  }  
 
   @Override
   public String getName() {
