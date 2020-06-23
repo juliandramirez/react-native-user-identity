@@ -3,6 +3,7 @@
   "version": "1.5.1",
   "description": "Get the user id configured for the device (iCloud recordID for iOS, email of a device account for android)",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": "Julian Ramírez <julianramirez@gmail.com>",
   "homepage": "https://github.com/juliandramirez/react-native-user-identity",
   "license": "Apache-2.0",
@@ -41,7 +42,7 @@
     "account",
     "intent",
     "newChooseAccountIntent",
-    "KEY_ACCOUNT_NAME"    
+    "KEY_ACCOUNT_NAME"
   ],
   "peerDependencies": {
     "react-native": ">=0.60.0",
