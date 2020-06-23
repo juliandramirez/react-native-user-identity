@@ -14,7 +14,7 @@ declare module "react-native-user-identity" {
     cancelButtonText?: string;
   }
 
-  type UserIdOptions = {
+  export type UserIdOptions = {
     iosUserConfirmation?: boolean | IosUserConfirmationOptions;
     androidAccountSelectionMessage?: string;
   }
