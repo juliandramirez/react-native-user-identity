@@ -14,14 +14,27 @@ class RNUserIdentity: NSObject
 {
 
   // MARK: - Services
-  
+
   @objc
-  public func getUserIdentity(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock)
+  public func getUserIdentity(_ iosOptions: NSDictionary, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock)
   {
-    CKContainer.default().fetchUserRecordID()
+    guard let iosOptionsDictionary = iosOptions as? [String: Any],
+          let containerId = iosOptionsDictionary["containerIdentifier"] as? String else {
+            reject("CloudKitError", "Error retrieving record id", nil)
+            return;
+        }
+
+    let container: CKContainer
+    if containerId != "default" {
+      container = CKContainer.init(identifier: containerId)
+    } else {
+      container = CKContainer.default()
+    }
+
+    container.fetchUserRecordID()
     {
       recordID, error in
-      
+
       if let result = recordID?.recordName {
         resolve(result)
       } else {
@@ -30,16 +43,16 @@ class RNUserIdentity: NSObject
           return;
         }
 
-        if let error = error as? NSError {          
+        if let error = error as? NSError {
           reject("CloudKitError", error.localizedDescription, error);
           return;
         }
-        
-        reject("CloudKitError", "Error retrieving record id", nil)        
+
+        reject("CloudKitError", "Error retrieving record id", nil)
       }
     }
   }
-  
+
   @objc
   static func requiresMainQueueSetup() -> Bool
   {
