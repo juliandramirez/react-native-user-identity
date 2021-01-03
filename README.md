@@ -77,14 +77,14 @@ Nothing to configure.
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-cloudkit.png)
 
-3. Enable the cloudkit option, add a container and name it **exactly as the bundle identifier of the application**:
+3. Enable the cloudkit option, add a container and name it **exactly as the bundle identifier of the application** for default usage:
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-cloudcontainer.png)
 
 4. Verify the configuration:
 
 **Verify all of the following:**
-* The format of the container name is iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)
+* The format of the container name is iCloud.$(PRODUCT_BUNDLE_IDENTIFIER) or another iCloud container you have created on iCloud dashboard (https://icloud.developer.apple.com/dashboard/)
 * Press the "Cloudkit Dashboard" button, sign in with your developer account. You should see your newly created container in the list of containers (If you don't see it go to XCode and press the refresh button until it does). Verify that there is no error when selecting your container in the web dashboard. <br> If there is an error just wait and keep trying until the container is created succesfully (web dashboard/Xcode 11 seems to be buggy here since creating an iCloud container actually takes a couple of minutes).
 * Go back to XCode and verify that the container name is not highlighted in red after you press the refresh option
 
@@ -96,13 +96,35 @@ Nothing to configure.
 * The function is marked as ***async***
 * The resolved value is ***null*** when the user cancels the UI flow
 * On **ios** the function will throw ICLOUD_ACCESS_ERROR when there is no icloud account configured
-  
+
+### Default container iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)
 ```javascript
 import RNUserIdentity, { ICLOUD_ACCESS_ERROR } from 'react-native-user-identity'
 
 fetchUserIdentity = async () => {
 	try {
 		const result = await RNUserIdentity.getUserId()
+		if (result === null) {
+			alert('User canceled UI flow')
+		} 
+	} catch(error) {
+		if (error === ICLOUD_ACCESS_ERROR) {
+			alert('Please set up an iCloud account in settings')
+		}
+	}
+}
+```
+### Named container iCloud.com.myCompany.myMultiContainerApp
+```javascript
+import RNUserIdentity, { ICLOUD_ACCESS_ERROR } from 'react-native-user-identity'
+
+fetchUserIdentity = async () => {
+	try {
+		const result = await RNUserIdentity.getUserId({
+            iosOptions: {
+                containerIdentifier: 'iCloud.com.myCompany.myMultiContainerApp'
+            }
+        })
 		if (result === null) {
 			alert('User canceled UI flow')
 		} 

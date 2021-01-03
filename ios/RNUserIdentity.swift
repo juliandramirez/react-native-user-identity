@@ -14,14 +14,19 @@ class RNUserIdentity: NSObject
 {
 
   // MARK: - Services
-  
+
   @objc
-  public func getUserIdentity(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock)
+  public func getUserIdentity(_ iosOptions: NSDictionary, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock)
   {
-    CKContainer.default().fetchUserRecordID()
-    {
-      recordID, error in
-      
+    guard let iosOptionsDictionary = iosOptions as? [String: Any],
+          let containerId = iosOptionsDictionary["containerIdentifier"] as? String else {
+            reject("CloudKitError", "Error retrieving record id", nil)
+            return;
+        }
+
+    let container = (containerId != "default") ? CKContainer.init(identifier: containerId) : CKContainer.default()
+
+    container.fetchUserRecordID(){recordID, error in
       if let result = recordID?.recordName {
         resolve(result)
       } else {
@@ -29,17 +34,15 @@ class RNUserIdentity: NSObject
           reject("NO_ACCOUNT_ACCESS_ERROR", "No iCloud account is associated with the device, or access to the account is restricted", nil);
           return;
         }
-
-        if let error = error as? NSError {          
+        if let error = error as? NSError {
           reject("CloudKitError", error.localizedDescription, error);
           return;
         }
-        
-        reject("CloudKitError", "Error retrieving record id", nil)        
+        reject("CloudKitError", "Error retrieving record id", nil)
       }
     }
   }
-  
+
   @objc
   static func requiresMainQueueSetup() -> Bool
   {

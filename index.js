@@ -6,7 +6,8 @@ const { RNUserIdentity } = NativeModules
 
 export const ICLOUD_ACCESS_ERROR = 'ICLOUD_ACCESS_ERROR'
 export default {
-    getUserId: async ({ androidAccountSelectionMessage, iosUserConfirmation } = {
+    getUserId: async ({ androidAccountSelectionMessage, iosUserConfirmation , iosOptions = {containerIdentifier: 'default'}} = {
+        
         androidAccountSelectionMessage: null,
         iosUserConfirmation: null
     }) => {
@@ -21,12 +22,12 @@ export default {
                 } = iosUserConfirmation
 
                 Alert.alert(
-                    title, 
-                    message, 
+                    title,
+                    message,
                     [{
                         text: signInButtonText,
                         onPress: () => {
-                            RNUserIdentity.getUserIdentity()
+                            RNUserIdentity.getUserIdentity(iosOptions)
                                 .then(value => resolve(value))
                                 .catch(error => {
                                     reject(error)
@@ -44,8 +45,8 @@ export default {
                 if (iosUserConfirmation) {
                     return await showUserConfirmation()
                 } else {
-                    return await RNUserIdentity.getUserIdentity()
-                }                
+                    return await RNUserIdentity.getUserIdentity(iosOptions)
+                }
             } catch (error) {
                 if (error && error.code == 'NO_ACCOUNT_ACCESS_ERROR') {
                     // there is no account configured...
@@ -57,7 +58,7 @@ export default {
         } else if (Platform.OS === 'android') {
             try {
                 return await RNUserIdentity.triggerAccountSelection(androidAccountSelectionMessage, 'com.google')
-            } catch (error) {           
+            } catch (error) {
                 if (error && error.code == 'USER_CANCELED_ACCOUNT_SELECTION') {
                     // user cancelled the account selection process...
                     return null
