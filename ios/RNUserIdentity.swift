@@ -24,17 +24,9 @@ class RNUserIdentity: NSObject
             return;
         }
 
-    let container: CKContainer
-    if containerId != "default" {
-      container = CKContainer.init(identifier: containerId)
-    } else {
-      container = CKContainer.default()
-    }
+    let container = (containerId != "default") ? CKContainer.init(identifier: containerId) : CKContainer.default()
 
-    container.fetchUserRecordID()
-    {
-      recordID, error in
-
+    container.fetchUserRecordID(){recordID, error in
       if let result = recordID?.recordName {
         resolve(result)
       } else {
@@ -42,12 +34,10 @@ class RNUserIdentity: NSObject
           reject("NO_ACCOUNT_ACCESS_ERROR", "No iCloud account is associated with the device, or access to the account is restricted", nil);
           return;
         }
-
         if let error = error as? NSError {
           reject("CloudKitError", error.localizedDescription, error);
           return;
         }
-
         reject("CloudKitError", "Error retrieving record id", nil)
       }
     }
