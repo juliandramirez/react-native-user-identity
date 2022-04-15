@@ -36,12 +36,14 @@ public class RNUserIdentityModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
     this.reactContext.addActivityEventListener(new BaseActivityEventListener() {
       public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {      
-        if(requestCode == INTENT_REQUEST_CODE) {
-          if (resultCode == Activity.RESULT_OK) {
-            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-            promise.resolve(accountName);
-          } else {
-              promise.reject("USER_CANCELED_ACCOUNT_SELECTION", "User cancelled the account selection dialog");
+        if (requestCode == INTENT_REQUEST_CODE) {
+          if (promise != null) {
+            if (resultCode == Activity.RESULT_OK) {
+              String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+              promise.resolve(accountName);
+            } else {
+                promise.reject("USER_CANCELED_ACCOUNT_SELECTION", "User cancelled the account selection dialog");
+            }
           }
         }
       }
