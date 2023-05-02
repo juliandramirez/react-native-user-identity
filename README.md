@@ -39,7 +39,7 @@ yarn add react-native-user-identity
 cd ios
 pod install
 ```
-**3. Configure swift support for your iOS project** 
+**3. (OPTIONAL STEP: REQUIRED FOR OLD DEPENDENCY VERSIONS AND SDKs) Configure swift support for your iOS project** 
 
 This configures your iOS project to use the module correctly since the library contains swift code (see the [official react native documentation](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift) for more information)
 
@@ -77,11 +77,12 @@ Nothing to configure.
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-cloudkit.png)
 
-3. Enable the cloudkit option, add a container and name it **exactly as the bundle identifier of the application**:
+3. Enable the CloudKit option of the iCloud capability
+
+4. (OPTIONAL STEP: REQUIRED FOR OLD IDE CONFIGURATIONS) Add a container and name it **exactly as the bundle identifier of the application**:
 
 ![alt text](https://raw.githubusercontent.com/juliandramirez/react-native-user-identity/master/docs/img/xcode-cloudcontainer.png)
 
-4. Verify the configuration:
 
 **Verify all of the following:**
 * The format of the container name is iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)
