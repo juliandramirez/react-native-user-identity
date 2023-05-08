@@ -168,8 +168,7 @@ The CloudKit framework prevents applications from accesing the user email for pr
 
 ### How is this different from Sign In with apple on iOS?
 Sign in with Apple requires the user to complete a full sign in flow.<br>
-The point of using this package is to skip entirely this flow so your users can directly start using your application<br>
-Furthermore, activating sign in with Apple also prevents your app from being transferable (see the **Why shouldn't you use this?** section above)
+The point of using this package is to skip entirely this flow so your users can directly start using your application
 
 ### I can not make this work on iOS...
 Make sure you followed all of the steps in the installation and configuration section and pay attention to the verification note at the end of the configuration section
