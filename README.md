@@ -22,13 +22,6 @@ Note: If you are already using firebase authentication see the FAQ for instructi
 <br><br>
 Note: If you are considering using Sign In with Apple see the FAQ section first
 
-## Why shouldn't you use this?
-This package requires you to activate the iCloud entitlement on iOS. <br>
-As of today apple does not permit transfering ownership of an application that has this entitlement active for **ANY** of it's versions. Read more [here](https://help.apple.com/app-store-connect/#/devaf27784ff) <br>
-<br>
-If you want to transfer your app in the future and you still want to use this package consider using an apple developer account exclusively for the app, and when the time comes transfer the account.<br>
-A personal apple developer account can be changed to a corporate account if needed, as is most of its information.
-
 ## Installation
 **1. Install the library**
 ```
